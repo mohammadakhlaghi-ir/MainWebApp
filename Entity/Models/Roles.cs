@@ -28,6 +28,6 @@ namespace Entity.Models
 
         // Relations
         public ICollection<Users> User { get; set; }
-        public ICollection<RolePermissions> RolePermission { get; set; }
+        public virtual List<RolePermissions> RolePemission { get; set; }
     }
 }

@@ -22,13 +22,7 @@ namespace Entity.Models
         [StringLength(250, ErrorMessage = "Address cannot exceed 250 characters.")]
         public string Description { get; set; }
 
-        // Foreign Keys 
-        [Required]
-        [ForeignKey("Role")]
-        public int RoleID { get; set; }
-
         // Navigation Property
-        public virtual Roles Role { get; set; }
-        public ICollection<RolePermissions> RolePermission { get; set; }
+        public virtual List<RolePermissions> RolePemission { get; set; }
     }
 }

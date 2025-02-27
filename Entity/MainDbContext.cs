@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Entity.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Entity
 {
@@ -17,6 +18,7 @@ namespace Entity
         public DbSet<Permissions> Permissions { get; set; }
         public DbSet<RolePermissions> RolePermissions { get; set; }
         #endregion
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -29,17 +31,18 @@ namespace Entity
                 .HasForeignKey(u => u.RoleID)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Many Roles With Many Permissions 
+            // Many-to-Many Role-Permissions Relationship
             modelBuilder.Entity<RolePermissions>()
                 .HasOne(rp => rp.Role)
-                .WithMany(r => r.RolePermission)
+                .WithMany(r => r.RolePemission)
                 .HasForeignKey(rp => rp.RoleID)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction); 
+
             modelBuilder.Entity<RolePermissions>()
                 .HasOne(rp => rp.Permission)
-                .WithMany(p => p.RolePermission)
+                .WithMany(p => p.RolePemission)
                 .HasForeignKey(rp => rp.PermissionID)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction); 
 
             #endregion
 
@@ -104,7 +107,7 @@ namespace Entity
                     RoleName = "Admin",
                     Description = "Administrator role",
                     IsDeleted = false,
-                    CreatedDate = DateTime.Now,
+                    CreatedDate = new DateTime(2025, 2, 26),
                 }
             );
 
@@ -135,7 +138,7 @@ namespace Entity
                     BirthDate = new DateTime(1990, 1, 1),
                     PhoneNumber = "123456789",
                     ProfileImage = "/images/profileImages/Admin.jpg",
-                    CreatedDate = DateTime.Now,
+                    CreatedDate = new DateTime(2025, 2, 26),
                     RoleID = 1,
                     IsActived = true,
                 }

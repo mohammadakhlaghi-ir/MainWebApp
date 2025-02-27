@@ -8,11 +8,25 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Entity.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class initialDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Permissions",
+                columns: table => new
+                {
+                    PermissionID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PermissionName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Permissions", x => x.PermissionID);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Roles",
                 columns: table => new
@@ -30,24 +44,27 @@ namespace Entity.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Permissions",
+                name: "RolePermissions",
                 columns: table => new
                 {
-                    PermissionID = table.Column<int>(type: "int", nullable: false)
+                    RolePermissionID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PermissionName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    RoleID = table.Column<int>(type: "int", nullable: false)
+                    RoleID = table.Column<int>(type: "int", nullable: false),
+                    PermissionID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Permissions", x => x.PermissionID);
+                    table.PrimaryKey("PK_RolePermissions", x => x.RolePermissionID);
                     table.ForeignKey(
-                        name: "FK_Permissions_Roles_RoleID",
+                        name: "FK_RolePermissions_Permissions_PermissionID",
+                        column: x => x.PermissionID,
+                        principalTable: "Permissions",
+                        principalColumn: "PermissionID");
+                    table.ForeignKey(
+                        name: "FK_RolePermissions_Roles_RoleID",
                         column: x => x.RoleID,
                         principalTable: "Roles",
-                        principalColumn: "RoleID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "RoleID");
                 });
 
             migrationBuilder.CreateTable(
@@ -81,51 +98,25 @@ namespace Entity.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "RolePermissions",
-                columns: table => new
-                {
-                    RolePermissionID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleID = table.Column<int>(type: "int", nullable: false),
-                    PermissionID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RolePermissions", x => x.RolePermissionID);
-                    table.ForeignKey(
-                        name: "FK_RolePermissions_Permissions_PermissionID",
-                        column: x => x.PermissionID,
-                        principalTable: "Permissions",
-                        principalColumn: "PermissionID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_RolePermissions_Roles_RoleID",
-                        column: x => x.RoleID,
-                        principalTable: "Roles",
-                        principalColumn: "RoleID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.InsertData(
                 table: "Permissions",
-                columns: new[] { "PermissionID", "Description", "PermissionName", "RoleID" },
+                columns: new[] { "PermissionID", "Description", "PermissionName" },
                 values: new object[,]
                 {
-                    { 1, "Add New User To Context", "Create Users", 0 },
-                    { 2, "Edit User Details", "Edit Users", 0 },
-                    { 3, "Set IsDeleted True For Users Or Delete From Context", "Delete Users", 0 },
-                    { 4, "View Details of Users", "View Users", 0 },
-                    { 6, "Add New Role To Context", "Create Roles", 0 },
-                    { 7, "Edit Roles Details", "Edit Roles", 0 },
-                    { 8, "Set IsDeleted True For Roles Or Delete From Context", "Delete Roles", 0 },
-                    { 9, "View Details of Roles", "View Roles", 0 }
+                    { 1, "Add New User To Context", "Create Users" },
+                    { 2, "Edit User Details", "Edit Users" },
+                    { 3, "Set IsDeleted True For Users Or Delete From Context", "Delete Users" },
+                    { 4, "View Details of Users", "View Users" },
+                    { 6, "Add New Role To Context", "Create Roles" },
+                    { 7, "Edit Roles Details", "Edit Roles" },
+                    { 8, "Set IsDeleted True For Roles Or Delete From Context", "Delete Roles" },
+                    { 9, "View Details of Roles", "View Roles" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Roles",
                 columns: new[] { "RoleID", "CreatedDate", "Description", "IsDeleted", "RoleName" },
-                values: new object[] { 1, new DateTime(2025, 2, 24, 20, 18, 3, 714, DateTimeKind.Local).AddTicks(5372), "Administrator role", false, "Admin" });
+                values: new object[] { 1, new DateTime(2025, 2, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "Administrator role", false, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "RolePermissions",
@@ -145,12 +136,7 @@ namespace Entity.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "UserID", "Address", "BirthDate", "CreatedDate", "Email", "FirstName", "IsActived", "IsDeleted", "LastName", "Password", "PhoneNumber", "ProfileImage", "RoleID", "UserName" },
-                values: new object[] { 1L, "Address", new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 2, 24, 20, 18, 3, 717, DateTimeKind.Local).AddTicks(7969), "michaelsevii17@gmail.com", "First Name", true, false, "Last Name", "123456", "123456789", "/images/profileImages/Admin.jpg", 1, "Admin" });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Permissions_RoleID",
-                table: "Permissions",
-                column: "RoleID");
+                values: new object[] { 1L, "Address", new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 2, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "michaelsevii17@gmail.com", "First Name", true, false, "Last Name", "123456", "123456789", "/images/profileImages/Admin.jpg", 1, "Admin" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_RolePermissions_PermissionID",

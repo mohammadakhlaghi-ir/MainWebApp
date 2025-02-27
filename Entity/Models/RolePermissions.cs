@@ -22,7 +22,7 @@ namespace Entity.Models
         public int PermissionID { get; set; }
 
         // Relations
-        public Roles Role { get; set; }
-        public Permissions Permission { get; set; }
+        public virtual Roles Role { get; set; }
+        public virtual Permissions Permission { get; set; }
     }
 }

@@ -40,12 +40,7 @@ namespace Entity.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("RoleID")
-                        .HasColumnType("int");
-
                     b.HasKey("PermissionID");
-
-                    b.HasIndex("RoleID");
 
                     b.ToTable("Permissions");
 
@@ -54,57 +49,49 @@ namespace Entity.Migrations
                         {
                             PermissionID = 1,
                             Description = "Add New User To Context",
-                            PermissionName = "Create Users",
-                            RoleID = 0
+                            PermissionName = "Create Users"
                         },
                         new
                         {
                             PermissionID = 2,
                             Description = "Edit User Details",
-                            PermissionName = "Edit Users",
-                            RoleID = 0
+                            PermissionName = "Edit Users"
                         },
                         new
                         {
                             PermissionID = 3,
                             Description = "Set IsDeleted True For Users Or Delete From Context",
-                            PermissionName = "Delete Users",
-                            RoleID = 0
+                            PermissionName = "Delete Users"
                         },
                         new
                         {
                             PermissionID = 4,
                             Description = "View Details of Users",
-                            PermissionName = "View Users",
-                            RoleID = 0
+                            PermissionName = "View Users"
                         },
                         new
                         {
                             PermissionID = 6,
                             Description = "Add New Role To Context",
-                            PermissionName = "Create Roles",
-                            RoleID = 0
+                            PermissionName = "Create Roles"
                         },
                         new
                         {
                             PermissionID = 7,
                             Description = "Edit Roles Details",
-                            PermissionName = "Edit Roles",
-                            RoleID = 0
+                            PermissionName = "Edit Roles"
                         },
                         new
                         {
                             PermissionID = 8,
                             Description = "Set IsDeleted True For Roles Or Delete From Context",
-                            PermissionName = "Delete Roles",
-                            RoleID = 0
+                            PermissionName = "Delete Roles"
                         },
                         new
                         {
                             PermissionID = 9,
                             Description = "View Details of Roles",
-                            PermissionName = "View Roles",
-                            RoleID = 0
+                            PermissionName = "View Roles"
                         });
                 });
 
@@ -213,7 +200,7 @@ namespace Entity.Migrations
                         new
                         {
                             RoleID = 1,
-                            CreatedDate = new DateTime(2025, 2, 24, 20, 28, 25, 643, DateTimeKind.Local).AddTicks(7284),
+                            CreatedDate = new DateTime(2025, 2, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Administrator role",
                             IsDeleted = false,
                             RoleName = "Admin"
@@ -294,7 +281,7 @@ namespace Entity.Migrations
                             UserID = 1L,
                             Address = "Address",
                             BirthDate = new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedDate = new DateTime(2025, 2, 24, 20, 28, 25, 657, DateTimeKind.Local).AddTicks(4686),
+                            CreatedDate = new DateTime(2025, 2, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "michaelsevii17@gmail.com",
                             FirstName = "First Name",
                             IsActived = true,
@@ -308,29 +295,18 @@ namespace Entity.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Entity.Models.Permissions", b =>
-                {
-                    b.HasOne("Entity.Models.Roles", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Role");
-                });
-
             modelBuilder.Entity("Entity.Models.RolePermissions", b =>
                 {
                     b.HasOne("Entity.Models.Permissions", "Permission")
-                        .WithMany("RolePermission")
+                        .WithMany("RolePemission")
                         .HasForeignKey("PermissionID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Entity.Models.Roles", "Role")
-                        .WithMany("RolePermission")
+                        .WithMany("RolePemission")
                         .HasForeignKey("RoleID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Permission");
@@ -351,12 +327,12 @@ namespace Entity.Migrations
 
             modelBuilder.Entity("Entity.Models.Permissions", b =>
                 {
-                    b.Navigation("RolePermission");
+                    b.Navigation("RolePemission");
                 });
 
             modelBuilder.Entity("Entity.Models.Roles", b =>
                 {
-                    b.Navigation("RolePermission");
+                    b.Navigation("RolePemission");
 
                     b.Navigation("User");
                 });
