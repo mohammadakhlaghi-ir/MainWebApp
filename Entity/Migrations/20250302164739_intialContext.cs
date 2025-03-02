@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Entity.Migrations
 {
     /// <inheritdoc />
-    public partial class initialDB : Migration
+    public partial class intialContext : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -116,7 +116,7 @@ namespace Entity.Migrations
             migrationBuilder.InsertData(
                 table: "Roles",
                 columns: new[] { "RoleID", "CreatedDate", "Description", "IsDeleted", "RoleName" },
-                values: new object[] { 1, new DateTime(2025, 2, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "Administrator role", false, "Admin" });
+                values: new object[] { 1, new DateTime(1999, 1, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "Administrator role", false, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "RolePermissions",
@@ -136,7 +136,7 @@ namespace Entity.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "UserID", "Address", "BirthDate", "CreatedDate", "Email", "FirstName", "IsActived", "IsDeleted", "LastName", "Password", "PhoneNumber", "ProfileImage", "RoleID", "UserName" },
-                values: new object[] { 1L, "Address", new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2025, 2, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "michaelsevii17@gmail.com", "First Name", true, false, "Last Name", "123456", "123456789", "/images/profileImages/Admin.jpg", 1, "Admin" });
+                values: new object[] { 1L, "Address", new DateTime(1999, 1, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1999, 1, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "michaelsevii17@gmail.com", "First Name", true, false, "Last Name", "1234", "09378982060", "default.png", 1, "Admin" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_RolePermissions_PermissionID",

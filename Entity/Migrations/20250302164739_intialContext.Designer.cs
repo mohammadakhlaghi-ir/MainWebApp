@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Entity.Migrations
 {
     [DbContext(typeof(MainDbContext))]
-    [Migration("20250227165636_initialDB")]
-    partial class initialDB
+    [Migration("20250302164739_intialContext")]
+    partial class intialContext
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -203,7 +203,7 @@ namespace Entity.Migrations
                         new
                         {
                             RoleID = 1,
-                            CreatedDate = new DateTime(2025, 2, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(1999, 1, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Administrator role",
                             IsDeleted = false,
                             RoleName = "Admin"
@@ -283,16 +283,16 @@ namespace Entity.Migrations
                         {
                             UserID = 1L,
                             Address = "Address",
-                            BirthDate = new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CreatedDate = new DateTime(2025, 2, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            BirthDate = new DateTime(1999, 1, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(1999, 1, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "michaelsevii17@gmail.com",
                             FirstName = "First Name",
                             IsActived = true,
                             IsDeleted = false,
                             LastName = "Last Name",
-                            Password = "123456",
-                            PhoneNumber = "123456789",
-                            ProfileImage = "/images/profileImages/Admin.jpg",
+                            Password = "1234",
+                            PhoneNumber = "09378982060",
+                            ProfileImage = "default.png",
                             RoleID = 1,
                             UserName = "Admin"
                         });
