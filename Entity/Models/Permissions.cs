@@ -20,7 +20,7 @@ namespace Entity.Models
 
         // Optional Columns
         [StringLength(250, ErrorMessage = "Address cannot exceed 250 characters.")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         // Navigation Property
         public virtual List<RolePermissions> RolePemission { get; set; }

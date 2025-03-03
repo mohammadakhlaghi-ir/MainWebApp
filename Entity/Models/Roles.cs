@@ -24,7 +24,12 @@ namespace Entity.Models
 
         // Optional Columns
         [StringLength(250, ErrorMessage = "Address cannot exceed 250 characters.")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTime? ModifyDate { get; set; }
+
+        public long? Modifier { get; set; }
 
         // Relations
         public ICollection<Users> User { get; set; }

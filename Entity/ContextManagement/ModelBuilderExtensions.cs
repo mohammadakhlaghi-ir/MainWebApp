@@ -76,7 +76,9 @@ namespace Entity.ContextManagement
                     ProfileImage = adminProfileImage,
                     CreatedDate = adminDefualtDate,
                     RoleID = 1,
-                    IsActived = true
+                    IsActived = true,
+                    ModifyDate = null,
+                    Modifier = null,
                 }
             );
         }

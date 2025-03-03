@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Entity.Migrations
 {
     /// <inheritdoc />
-    public partial class intialContext : Migration
+    public partial class intitalDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,7 +20,7 @@ namespace Entity.Migrations
                     PermissionID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PermissionName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false)
+                    Description = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -36,7 +36,9 @@ namespace Entity.Migrations
                     RoleName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false)
+                    Description = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    ModifyDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Modifier = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -84,7 +86,9 @@ namespace Entity.Migrations
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ProfileImage = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsActived = table.Column<bool>(type: "bit", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    ModifyDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Modifier = table.Column<long>(type: "bigint", nullable: true),
                     RoleID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -115,8 +119,8 @@ namespace Entity.Migrations
 
             migrationBuilder.InsertData(
                 table: "Roles",
-                columns: new[] { "RoleID", "CreatedDate", "Description", "IsDeleted", "RoleName" },
-                values: new object[] { 1, new DateTime(1999, 1, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "Administrator role", false, "Admin" });
+                columns: new[] { "RoleID", "CreatedDate", "Description", "IsDeleted", "Modifier", "ModifyDate", "RoleName" },
+                values: new object[] { 1, new DateTime(1999, 1, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "Administrator role", false, null, null, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "RolePermissions",
@@ -135,8 +139,8 @@ namespace Entity.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "UserID", "Address", "BirthDate", "CreatedDate", "Email", "FirstName", "IsActived", "IsDeleted", "LastName", "Password", "PhoneNumber", "ProfileImage", "RoleID", "UserName" },
-                values: new object[] { 1L, "Address", new DateTime(1999, 1, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1999, 1, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "michaelsevii17@gmail.com", "First Name", true, false, "Last Name", "1234", "09378982060", "default.png", 1, "Admin" });
+                columns: new[] { "UserID", "Address", "BirthDate", "CreatedDate", "Email", "FirstName", "IsActived", "IsDeleted", "LastName", "Modifier", "ModifyDate", "Password", "PhoneNumber", "ProfileImage", "RoleID", "UserName" },
+                values: new object[] { 1L, "Address", new DateTime(1999, 1, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1999, 1, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "michaelsevii17@gmail.com", "First Name", true, false, "Last Name", null, null, "1234", "09378982060", "default.png", 1, "Admin" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_RolePermissions_PermissionID",
