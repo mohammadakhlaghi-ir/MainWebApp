@@ -15,11 +15,11 @@ namespace Entity.Models
 
         // Required Columns
         [Required]
-        [StringLength(50, ErrorMessage = "First name cannot exceed 50 characters.")]
+        [StringLength(50, ErrorMessage = "Permission Name cannot exceed 50 characters.")]
         public string PermissionName { get; set; }
 
         // Optional Columns
-        [StringLength(250, ErrorMessage = "Address cannot exceed 250 characters.")]
+        [StringLength(250, ErrorMessage = "Description cannot exceed 250 characters.")]
         public string? Description { get; set; }
 
         // Navigation Property

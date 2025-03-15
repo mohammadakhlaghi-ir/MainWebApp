@@ -28,7 +28,7 @@ namespace Entity.Models
         public string LastName { get; set; }
 
         [Required]
-        [StringLength(50, ErrorMessage = "PhoneNumber cannot exceed 50 characters.")]
+        [StringLength(50, ErrorMessage = "Phone Number cannot exceed 50 characters.")]
         public string PhoneNumber { get; set; }
 
         [Required]

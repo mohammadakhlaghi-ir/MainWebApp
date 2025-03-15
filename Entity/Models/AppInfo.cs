@@ -7,22 +7,28 @@ using System.Threading.Tasks;
 
 namespace Entity.Models
 {
-    public class Roles
+    public class AppInfo
     {
         [Key]
-        public int RoleID { get; set; }
-
+        public long AppID { get; set; }
         // Required Columns
+
         [Required]
-        [StringLength(50, ErrorMessage = "Role name cannot exceed 50 characters.")]
-        public string RoleName { get; set; }
+        [StringLength(50, MinimumLength = 2, ErrorMessage = "AppName must be between 2 and 50 characters.")]
+        public string AppName { get; set; }
+
         [Required]
-        public bool IsDeleted { get; set; }
+        public string Logo { get; set; }
+        
+        [Required]
+        public string Favicon { get; set; }
+
         [Required]
         [DataType(DataType.Date)]
         public DateTime CreatedDate { get; set; }
 
         // Optional Columns
+
         [StringLength(250, ErrorMessage = "Description cannot exceed 250 characters.")]
         public string? Description { get; set; }
 
@@ -30,9 +36,5 @@ namespace Entity.Models
         public DateTime? ModifyDate { get; set; }
 
         public long? Modifier { get; set; }
-
-        // Relations
-        public ICollection<Users> User { get; set; }
-        public virtual List<RolePermissions> RolePemission { get; set; }
     }
 }

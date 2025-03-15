@@ -19,6 +19,7 @@ namespace Entity
         public DbSet<Roles> Roles { get; set; }
         public DbSet<Permissions> Permissions { get; set; }
         public DbSet<RolePermissions> RolePermissions { get; set; }
+        public DbSet<AppInfo> AppInfo { get; set; }
         #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -19,4 +19,9 @@
     <ProjectReference Include="..\Entity\Entity.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\media\images\logo\" />
+    <Folder Include="wwwroot\media\images\favicon\" />
+  </ItemGroup>
+
 </Project>

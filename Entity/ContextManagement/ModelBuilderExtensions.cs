@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Entity.ContextManagement
-{  
+{
     public static class ModelBuilderExtensions
     {
         // inital variables
@@ -20,19 +20,62 @@ namespace Entity.ContextManagement
         static string adminPhoneNumber = "09378982060";
         static string adminProfileImage = "default.png";
         static DateTime adminDefualtDate = new DateTime(1999, 1, 19);
+        static string appDefaultName = "MainWebApp";
+        static string favIconDefault = "favicon.ico";
+        static string logoDefault = "logo.png";
 
         public static void Seed(this ModelBuilder modelBuilder)
         {
             // Permissions
             modelBuilder.Entity<Permissions>().HasData(
-                new Permissions { PermissionID = 1, PermissionName = "Create Users", Description = "Add New User To Context" },
-                new Permissions { PermissionID = 2, PermissionName = "Edit Users", Description = "Edit User Details" },
-                new Permissions { PermissionID = 3, PermissionName = "Delete Users", Description = "Set IsDeleted True For Users Or Delete From Context" },
-                new Permissions { PermissionID = 4, PermissionName = "View Users", Description = "View Details of Users" },
-                new Permissions { PermissionID = 6, PermissionName = "Create Roles", Description = "Add New Role To Context" },
-                new Permissions { PermissionID = 7, PermissionName = "Edit Roles", Description = "Edit Roles Details" },
-                new Permissions { PermissionID = 8, PermissionName = "Delete Roles", Description = "Set IsDeleted True For Roles Or Delete From Context" },
-                new Permissions { PermissionID = 9, PermissionName = "View Roles", Description = "View Details of Roles" }
+                new Permissions
+                {
+                    PermissionID = 1,
+                    PermissionName = "Create Users",
+                    Description = "Add New User To Context"
+                },
+                new Permissions
+                {
+                    PermissionID = 2,
+                    PermissionName = "Edit Users",
+                    Description = "Edit User Details"
+                },
+                new Permissions
+                {
+                    PermissionID = 3,
+                    PermissionName = "Delete Users",
+                    Description = "Set IsDeleted True For Users Or Delete From Context"
+                },
+                new Permissions
+                {
+                    PermissionID = 4,
+                    PermissionName = "View Users",
+                    Description = "View Details of Users"
+                },
+                new Permissions
+                {
+                    PermissionID = 6,
+                    PermissionName = "Create Roles",
+                    Description = "Add New Role To Context"
+                },
+                new Permissions
+                {
+                    PermissionID = 7,
+                    PermissionName = "Edit Roles",
+                    Description = "Edit Roles Details"
+                },
+                new Permissions
+                {
+                    PermissionID = 8,
+                    PermissionName = "Delete Roles",
+                    Description = "Set IsDeleted True For Roles Or Delete From Context"
+                },
+                new Permissions
+                {
+                    PermissionID = 9,
+                    PermissionName = "View Roles",
+                    Description = "View Details of Roles"
+                }
             );
 
             // Roles
@@ -64,7 +107,7 @@ namespace Entity.ContextManagement
                 new Users
                 {
                     UserID = 1,
-                    UserName =adminUserName,
+                    UserName = adminUserName,
                     Email = adminEmail,
                     FirstName = adminFirstName,
                     LastName = adminLastName,
@@ -79,6 +122,18 @@ namespace Entity.ContextManagement
                     IsActived = true,
                     ModifyDate = null,
                     Modifier = null,
+                }
+            );
+
+            // App Info
+            modelBuilder.Entity<AppInfo>().HasData(
+                new AppInfo
+                {
+                    AppID = 1,
+                    AppName = appDefaultName,
+                    CreatedDate = adminDefualtDate,
+                    Favicon = favIconDefault,
+                    Logo = logoDefault,
                 }
             );
         }
