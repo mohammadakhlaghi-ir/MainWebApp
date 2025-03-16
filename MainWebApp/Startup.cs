@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using MainWebApp.Controllers;
 using Entity;
 using Microsoft.EntityFrameworkCore;
+using Entity.Models;
+using Core.Interfaces;
+using Core.Services;
 namespace MainWebApp
 {
     public class Startup
@@ -38,6 +41,7 @@ namespace MainWebApp
             #endregion
 
             #region Services Scoped
+            services.AddScoped<IAppInfo, AppInfoServices>();
             #endregion
             services.AddControllersWithViews();
         }

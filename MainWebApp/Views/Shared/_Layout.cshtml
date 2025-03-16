@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MainWebApp.styles.css" asp-append-version="true" />
+    @await Component.InvokeAsync("AppInfo", new { viewName = "Favicon" })
+
 </head>
 <body>
     <header>
